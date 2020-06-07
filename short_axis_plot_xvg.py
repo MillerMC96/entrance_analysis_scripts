@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import sys
+import argparse
 
 def find_distance_between(p0, p1):
     dx = p1.x - p0.x
@@ -35,7 +36,9 @@ lines = xvg_file.readlines()
 # customize title
 # fig_title = sys.argv[2]
 
-#
+# customize pmf window beginning and ending points
+# pmf_begin
+# pmf_end
 
 # distance array
 dist = []
