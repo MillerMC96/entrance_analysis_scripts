@@ -60,7 +60,8 @@ dist_pd = pd.Series(dist)
 move_std = dist_pd.rolling(N).std()
 
 plt.scatter(time, dist, s = 2)
-plt.hlines(7.36, time[0], time[-1], colors = 'k', linestyles = '--', label = "initial distance")
+#plt.hlines(7.36, time[0], time[-1], colors = 'k', linestyles = '--', label = "initial distance")
+#plt.axvline(x=110, color = 'k', linestyle = '--', label = 'PMF starting point')
 
 #plotting moving mean
 plt.plot(time[N-1:-N], move_mean[N-1:-N], 'r', label = "moving average over " + str(N) + " points")
@@ -75,7 +76,7 @@ for dist_point, std in zip(move_mean, move_std):
 
 plt.fill_between(time[N-1:-N], dist_upper_bound[N-1:-N], dist_lower_bound[N-1:-N], alpha = 0.4, label = "error band")
 
-plt.ylim(5, 13)
+plt.ylim(4, 11)
 plt.xlabel("time [ps]")
 plt.ylabel("distance [Å]")
 plt.title("distance along the short axis over time")
