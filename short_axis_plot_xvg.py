@@ -33,12 +33,14 @@ xvg_file = open(sys.argv[1], 'r')
 lines = xvg_file.readlines()
 
 # customize title
-#fig_title = sys.argv[2]
+# fig_title = sys.argv[2]
+
+#
 
 # distance array
 dist = []
 
-#time array
+# time array
 time = []
 
 # unit conversion
@@ -67,38 +69,38 @@ top = np.amax(dist) + np.std(dist)
 bottom = np.amin(dist) - np.std(dist)
 plt.ylim([bottom, top])
 
-#window
+# window
 N = 100
 
-#moving mean
+# moving mean
 move_mean = np.convolve(dist, np.ones((N,))/N, mode = 'same')
 
-#moving standard deviation
+# moving standard deviation
 dist_pd = pd.Series(dist)
 move_std = dist_pd.rolling(N).std()
 
 plt.scatter(time, dist, s = 2)
 plt.hlines(6.526, time[0], time[-1], colors = 'k', linestyles = '--', label = "crystal structure")
-#plt.axvline(x=110, color = 'k', linestyle = '--', label = 'PMF starting point')
+# plt.axvline(x=110, color = 'k', linestyle = '--', label = 'PMF starting point')
 
-#plotting moving mean
+# plotting moving mean
 plt.plot(time[N-1:-N], move_mean[N-1:-N], 'r', label = "moving average over " + str(N) + " points")
 
-#plotting moving std
+# plotting moving std
 dist_upper_bound = list()
 dist_lower_bound = list()
 
 for dist_point, std in zip(move_mean, move_std):
     dist_upper_bound.append(dist_point + std)
     dist_lower_bound.append(dist_point - std)
-#plotting error band
+# plotting error band
 plt.fill_between(time[N-1:-N], dist_upper_bound[N-1:-N], dist_lower_bound[N-1:-N], alpha = 0.4, label = "error band")
 
-#TODO add customizable pmf windows
+# customizable pmf windows
 for i in np.linspace(70, 100, 11):
     plot_pmf_window(i)
 
-#self adapting ylim
+# self adapting ylim
 plt.ylim(bottom, top)
 plt.xlabel("time [ps]")
 plt.ylabel("distance [Å]")
