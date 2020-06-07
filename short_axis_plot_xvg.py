@@ -60,7 +60,7 @@ dist_pd = pd.Series(dist)
 move_std = dist_pd.rolling(N).std()
 
 plt.scatter(time, dist, s = 2)
-#plt.hlines(7.36, time[0], time[-1], colors = 'k', linestyles = '--', label = "initial distance")
+plt.hlines(6.526, time[0], time[-1], colors = 'k', linestyles = '--', label = "initial distance")
 #plt.axvline(x=110, color = 'k', linestyle = '--', label = 'PMF starting point')
 
 #plotting moving mean
