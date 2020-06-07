@@ -10,6 +10,18 @@ def find_distance_between(p0, p1):
     distance = np.sqrt(dx ** 2 + dy ** 2 + dz ** 2)
     return distance
 
+def plot_pmf_window(time_step):
+    # pull indicators
+
+    transparency = 0.7
+    text_spacing = 2
+    offset_from_indicator = 0.2
+    
+    # time step indicator
+    plt.axvline(time_step, alpha=transparency) 
+    plt.text(time_step + offset_from_indicator, bottom + text_spacing, str(time_step), rotation=90)
+
+
 class atom:
     def __init__(self, x_coor, y_coor, z_coor):
         self.x = float(x_coor)
@@ -48,6 +60,12 @@ for line in lines:
         dist2 = find_distance_between(ALA63_2, PHE28)
         dist3 = find_distance_between(ALA63_3, PHE28)
         dist.append((dist1 + dist2 + dist3) / 3 * nm_to_angstrom)
+# plot parameters
+
+spacing = 2
+top = np.amax(dist) + spacing
+bottom = np.amin(dist) - spacing
+plt.ylim([bottom, top])
 
 #window
 N = 100
@@ -75,6 +93,9 @@ for dist_point, std in zip(move_mean, move_std):
     dist_lower_bound.append(dist_point - std)
 #plotting error band
 plt.fill_between(time[N-1:-N], dist_upper_bound[N-1:-N], dist_lower_bound[N-1:-N], alpha = 0.4, label = "error band")
+
+for i in np.linspace(70, 100, 11):
+    plot_pmf_window(i)
 
 plt.ylim(4, 11)
 plt.xlabel("time [ps]")
