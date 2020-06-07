@@ -73,7 +73,7 @@ dist_lower_bound = list()
 for dist_point, std in zip(move_mean, move_std):
     dist_upper_bound.append(dist_point + std)
     dist_lower_bound.append(dist_point - std)
-
+#plotting error band
 plt.fill_between(time[N-1:-N], dist_upper_bound[N-1:-N], dist_lower_bound[N-1:-N], alpha = 0.4, label = "error band")
 
 plt.ylim(4, 11)
