@@ -15,7 +15,7 @@ def plot_pmf_window(time_step):
     # pull indicators
 
     transparency = 0.7
-    text_spacing = 2
+    text_spacing = bottom * 0.02
     offset_from_indicator = 0.2
 
     # time step indicator
@@ -32,13 +32,13 @@ class atom:
 parser = argparse.ArgumentParser(description = 'plotting the short axis distance.')
 parser.add_argument('xvg', metavar='file', nargs='+', type=open, \
                     help='the xvg file containing short axis atoms')
-parser.add_argument('-pmf', metavar='b e', nargs=2,action='store', \
-                    help='plot the pmf windows')
+parser.add_argument('-pmf', metavar='b e', nargs=2, action='store', \
+                    type=int, help='plot the pmf windows')
 args = parser.parse_args()
 
 # customize pmf window beginning and ending points
-pmf_begin = pmf[0]
-pmf_end = pmf[1]
+pmf_begin = args.pmf[0]
+pmf_end = args.pmf[1]
 
 # read file from command line
 xvg_file = open(sys.argv[1], 'r')
@@ -106,7 +106,8 @@ for dist_point, std in zip(move_mean, move_std):
 plt.fill_between(time[N-1:-N], dist_upper_bound[N-1:-N], dist_lower_bound[N-1:-N], alpha = 0.4, label = "error band")
 
 # customizable pmf windows
-for i in np.linspace(30, 130, 11):
+
+for i in np.linspace(pmf_begin, pmf_end, 11):
     plot_pmf_window(i)
 
 # self adapting ylim
