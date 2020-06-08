@@ -75,9 +75,9 @@ for line in lines:
         dist.append((dist1 + dist2 + dist3) / 3 * nm_to_angstrom)
 
 # plot parameters
-spacing = 2
-top = np.amax(dist) + np.std(dist)
-bottom = np.amin(dist) - np.std(dist)
+spacing = np.amax(dist) * 0.02
+top = np.amax(dist) + spacing
+bottom = np.amin(dist) - spacing
 
 # window
 N = 100
