@@ -30,6 +30,7 @@ class atom:
         self.z = float(z_coor)
 
 parser = argparse.ArgumentParser(description = 'plotting the short axis distance.')
+# xvg option not usable now, but PMF is working fine
 parser.add_argument('xvg', metavar='file', nargs='+', type=open, \
                     help='the xvg file containing short axis atoms')
 parser.add_argument('-pmf', metavar='b e', nargs=2, action='store', \
