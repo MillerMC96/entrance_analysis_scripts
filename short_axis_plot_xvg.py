@@ -30,17 +30,15 @@ class atom:
         self.z = float(z_coor)
 
 parser = argparse.ArgumentParser(description = 'plotting the short axis distance.')
-parser.add_argument('xvg file', metavar='file', nargs='+', \
+parser.add_argument('xvg', metavar='file', nargs='+', type=open, \
                     help='the xvg file containing short axis atoms')
-parser.add_argument('-pmf', dest='accumulate', action='store_const', \
-                    const=sum, default=max, \
+parser.add_argument('-pmf', metavar='b e', nargs=2,action='store', \
                     help='plot the pmf windows')
 args = parser.parse_args()
-print(args.accumulate(args.integers))
 
 # customize pmf window beginning and ending points
-# pmf_begin
-# pmf_end
+pmf_begin = pmf[0]
+pmf_end = pmf[1]
 
 # read file from command line
 xvg_file = open(sys.argv[1], 'r')
@@ -108,7 +106,7 @@ for dist_point, std in zip(move_mean, move_std):
 plt.fill_between(time[N-1:-N], dist_upper_bound[N-1:-N], dist_lower_bound[N-1:-N], alpha = 0.4, label = "error band")
 
 # customizable pmf windows
-for i in np.linspace(70, 100, 11):
+for i in np.linspace(30, 130, 11):
     plot_pmf_window(i)
 
 # self adapting ylim
