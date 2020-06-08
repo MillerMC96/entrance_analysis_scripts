@@ -33,7 +33,7 @@ parser = argparse.ArgumentParser(description = 'plotting the short axis distance
 # xvg option not usable now, but PMF is working fine
 parser.add_argument('xvg', metavar='file', nargs='+', type=open, \
                     help='the xvg file containing short axis atoms')
-parser.add_argument('-pmf', metavar='b e', nargs=2, action='store', \
+parser.add_argument('-pmf', metavar=('b', 'e'), nargs=2, action='store', \
                     type=int, help='plot the pmf windows')
 args = parser.parse_args()
 
