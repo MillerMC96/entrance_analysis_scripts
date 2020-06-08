@@ -29,16 +29,25 @@ class atom:
         self.y = float(y_coor)
         self.z = float(z_coor)
 
+parser = argparse.ArgumentParser(description = 'plotting the short axis distance.')
+parser.add_argument('xvg file', metavar='file', nargs='+', \
+                    help='the xvg file containing short axis atoms')
+parser.add_argument('-pmf', dest='accumulate', action='store_const', \
+                    const=sum, default=max, \
+                    help='plot the pmf windows')
+args = parser.parse_args()
+print(args.accumulate(args.integers))
+
+# customize pmf window beginning and ending points
+# pmf_begin
+# pmf_end
+
 # read file from command line
 xvg_file = open(sys.argv[1], 'r')
 lines = xvg_file.readlines()
 
 # customize title
 # fig_title = sys.argv[2]
-
-# customize pmf window beginning and ending points
-# pmf_begin
-# pmf_end
 
 # distance array
 dist = []
@@ -70,7 +79,6 @@ for line in lines:
 spacing = 2
 top = np.amax(dist) + np.std(dist)
 bottom = np.amin(dist) - np.std(dist)
-plt.ylim([bottom, top])
 
 # window
 N = 100
