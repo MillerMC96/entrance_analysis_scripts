@@ -43,7 +43,7 @@ for line in lines:
     first_charactor = line_entry[0]
     if first_charactor[0] != '#' and first_charactor[0] != '@':
         # read data
-        data_line.append(line_entry[1:-1])
+        data_line.append(line_entry[1:])
         time.append(float(line_entry[0]))
 
 # numpy array of frames
