@@ -99,7 +99,7 @@ plt.fill_between(time[N-1:-N], energy_frames_upper_bound[N-1:-N], \
 # self adapting ylim
 plt.ylim(bottom, top)
 plt.xlabel("time [ps]")
-plt.ylabel("distance [Å]")
+plt.ylabel("energy [kJ/mol]")
 plt.title("elastic energy of heavy atoms over time")
 plt.legend(loc = 'best')
 plt.show()
