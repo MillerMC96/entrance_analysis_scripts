@@ -44,7 +44,7 @@ for line in lines:
     if first_charactor[0] != '#' and first_charactor[0] != '@':
         # read data
         data_line.append(line_entry[1:-1])
-        time.append(line_entry[0])
+        time.append(float(line_entry[0]))
 
 # numpy array of frames
 frames_str = np.array(data_line)
@@ -82,19 +82,19 @@ plt.scatter(time, energy_frames, s = 2)
 # plt.axvline(x=110, color = 'k', linestyle = '--', label = 'PMF starting point')
 
 # plotting moving mean
-plt.plot(time[N-1:-N], move_mean[N-1:-N], 'r', label = "moving average over " + str(N) + " points")
+#plt.plot(time[N-1:-N], move_mean[N-1:-N], 'r', label = "moving average over " + str(N) + " points")
 
 # plotting moving std
-energy_frames_upper_bound = list()
-energy_frames_lower_bound = list()
+#energy_frames_upper_bound = list()
+#energy_frames_lower_bound = list()
 
-for energy_frames_point, std in zip(move_mean, move_std):
-    energy_frames_upper_bound.append(energy_frames_point + std)
-    energy_frames_lower_bound.append(energy_frames_point - std)
+#for energy_frames_point, std in zip(move_mean, move_std):
+#    energy_frames_upper_bound.append(energy_frames_point + std)
+#    energy_frames_lower_bound.append(energy_frames_point - std)
 # plotting error band
-plt.fill_between(time[N-1:-N], energy_frames_upper_bound[N-1:-N], \
-                 energy_frames_lower_bound[N-1:-N], alpha = 0.4, \
-                 label = "error band")
+#plt.fill_between(time[N-1:-N], energy_frames_upper_bound[N-1:-N], \
+#                 energy_frames_lower_bound[N-1:-N], alpha = 0.4, \
+#                 label = "error band")
 
 # self adapting ylim
 plt.ylim(bottom, top)
