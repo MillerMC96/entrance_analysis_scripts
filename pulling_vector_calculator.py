@@ -2,8 +2,7 @@ import numpy as np
 import sys
 
 class atom:
-    def __init__(self, atom_name = 'EMPTY', x_pos = 0, y_pos = 0, z_pos = 0):
-        self.name = atom_name
+    def __init__(self, x_pos = 0, y_pos = 0, z_pos = 0):
         self.x = float(x_pos)
         self.y = float(y_pos)
         self.z = float(z_pos)
@@ -18,7 +17,7 @@ def convert_methyl_to_one_point(atom_list = [atom(), atom(), atom()]):
 # parse axis atoms
 def read_axis_atoms(data_line):
     axis_atoms = []
-    for i in range(4):
+    for i in range(0, 12, 3):
         axis_atoms.append(atom(data_line[i], data_line[i+1], data_line[i+2]))
     return axis_atoms
 
