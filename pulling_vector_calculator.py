@@ -45,3 +45,8 @@ for line in lines:
         short_axis = get_short_axis_segment(line_entry)
         long_axis = get_long_axis_segment(line_entry)
 
+# vector calculation
+short_axis_methyl = convert_methyl_to_one_point(short_axis[:-1])
+long_axis_methyl = convert_methyl_to_one_point(long_axis[:-1])
+
+# vectors
