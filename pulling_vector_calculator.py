@@ -7,7 +7,7 @@ class atom:
         self.y = float(y_pos)
         self.z = float(z_pos)
     # return a vector from another atom to this atom 
-    def subtract(another_atom):
+    def subtract(self, another_atom):
         dx = self.x - another_atom.x
         dy = self.y - another_atom.y
         dz = self.z - another_atom.z
@@ -56,4 +56,5 @@ short_axis_methyl = convert_methyl_to_one_point(short_axis[:-1])
 long_axis_methyl = convert_methyl_to_one_point(long_axis[:-1])
 
 # vectors
-
+short_axis_vec = short_axis[3].subtract(short_axis_methyl)
+long_axis_vec = long_axis[3].subtract(long_axis_methyl)
