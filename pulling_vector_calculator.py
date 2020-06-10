@@ -6,13 +6,19 @@ class atom:
         self.x = float(x_pos)
         self.y = float(y_pos)
         self.z = float(z_pos)
+    # return a vector from another atom to this atom 
+    def subtract(another_atom):
+        dx = self.x - another_atom.x
+        dy = self.y - another_atom.y
+        dz = self.z - another_atom.z
+        return atom(dx, dy, dz)
 
 # convert methyl groups into single points
 def convert_methyl_to_one_point(atom_list = [atom(), atom(), atom()]):
     x = (atom_list[0].x + atom_list[1].x + atom_list[2].x) / 3
     y = (atom_list[0].y + atom_list[1].y + atom_list[2].y) / 3
     z = (atom_list[0].z + atom_list[1].z + atom_list[2].z) / 3
-    return atom(atom_list[0].name, x, y, z)
+    return atom(x, y, z)
 
 # parse axis atoms
 def read_axis_atoms(data_line):
@@ -50,3 +56,4 @@ short_axis_methyl = convert_methyl_to_one_point(short_axis[:-1])
 long_axis_methyl = convert_methyl_to_one_point(long_axis[:-1])
 
 # vectors
+
