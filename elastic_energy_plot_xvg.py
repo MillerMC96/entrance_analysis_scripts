@@ -53,14 +53,17 @@ frames = frames_str.astype(np.float)
 frames = frames * 10
 # frames = np.transpose(frames)
 # find deviations
+# equilibration_point
 first_frame = frames[0]
 deviations = frames - first_frame
 # square deviations
 deviations_squared = np.square(deviations)
 # multiply by force constant to get energy
-all_energies = deviations_squared * FC
-# sum up the columns
-energy_frames = all_energies.sum(axis=1)
+#all_energies = 1/2 * deviations_squared * FC
+deviations_squared_sums = deviations_squared.sum(axis=1)
+# sum up the rows
+energy_frames = 1/2 * deviations_squared_sums * FC
+#energy_frames = all_energies.sum(axis=1)
 
 # plot parameters
 spacing = np.amax(energy_frames) * 0.02
@@ -82,19 +85,19 @@ plt.scatter(time, energy_frames, s = 2)
 # plt.axvline(x=110, color = 'k', linestyle = '--', label = 'PMF starting point')
 
 # plotting moving mean
-#plt.plot(time[N-1:-N], move_mean[N-1:-N], 'r', label = "moving average over " + str(N) + " points")
+plt.plot(time[N-1:-N], move_mean[N-1:-N], 'r', label = "moving average over " + str(N) + " points")
 
 # plotting moving std
-#energy_frames_upper_bound = list()
-#energy_frames_lower_bound = list()
+energy_frames_upper_bound = list()
+energy_frames_lower_bound = list()
 
-#for energy_frames_point, std in zip(move_mean, move_std):
-#    energy_frames_upper_bound.append(energy_frames_point + std)
-#    energy_frames_lower_bound.append(energy_frames_point - std)
+for energy_frames_point, std in zip(move_mean, move_std):
+    energy_frames_upper_bound.append(energy_frames_point + std)
+    energy_frames_lower_bound.append(energy_frames_point - std)
 # plotting error band
-#plt.fill_between(time[N-1:-N], energy_frames_upper_bound[N-1:-N], \
-#                 energy_frames_lower_bound[N-1:-N], alpha = 0.4, \
-#                 label = "error band")
+plt.fill_between(time[N-1:-N], energy_frames_upper_bound[N-1:-N], \
+                 energy_frames_lower_bound[N-1:-N], alpha = 0.4, \
+                 label = "error band")
 
 # self adapting ylim
 plt.ylim(bottom, top)
