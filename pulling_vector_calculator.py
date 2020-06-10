@@ -56,5 +56,15 @@ short_axis_methyl = convert_methyl_to_one_point(short_axis[:-1])
 long_axis_methyl = convert_methyl_to_one_point(long_axis[:-1])
 
 # vectors
-short_axis_vec = short_axis[3].subtract(short_axis_methyl)
-long_axis_vec = long_axis[3].subtract(long_axis_methyl)
+short_axis_vec = np.array([short_axis[3].subtract(short_axis_methyl).x, \
+                           short_axis[3].subtract(short_axis_methyl).y, \
+                           short_axis[3].subtract(short_axis_methyl).z])
+
+long_axis_vec = np.array([long_axis[3].subtract(long_axis_methyl).x, \
+                          long_axis[3].subtract(long_axis_methyl).y, \
+                          long_axis[3].subtract(long_axis_methyl).z])
+
+# final pulling vector
+pulling_vector = np.cross(short_axis_vec, long_axis_vec)
+
+print(pulling_vector)
